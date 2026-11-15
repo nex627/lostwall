@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>gigwall — 音乐节防丢壁纸</title>
+<meta name="description" content="选一张音乐节海报或自己的现场照，印上能联系到你的号码，设成锁屏。手机丢了，捡到的人一按电源键就能看见。">
+<meta name="theme-color" content="#F7F6F3">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="wxbar" id="wxbar" hidden>
+  微信里保存图片会受限 —— 点右上角「⋯」选「在浏览器打开」
+</div>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <h1>gigwall</h1>
+    </div>
+    <p class="tag">把演出设成锁屏，丢了有人能打给你</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="stage" aria-label="壁纸预览">
+    <div class="phone">
+      <canvas id="canvas" width="1179" height="2556"></canvas>
+      <div class="lockui" id="lockui" hidden aria-hidden="true">
+        <div class="lock-time">09:41</div>
+        <div class="lock-notes">
+          <div class="note"></div>
+          <div class="note"></div>
+          <div class="note"></div>
+        </div>
+        <div class="lock-btns">
+          <span></span><span></span>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="hint">填一个号码就能出图</p>
+    <label class="toggle">
+      <input type="checkbox" id="simLock">
+      <span>叠加锁屏时间与通知，看遮挡效果</span>
+    </label>
+  </section>
+
+  <section class="panel" aria-label="设置">
+
+    <div class="field">
+      <span class="lb">底图</span>
+      <div class="seg seg-wide" id="segMode">
+        <button type="button" data-v="generic" class="on">通用款</button>
+        <button type="button" data-v="festival">音乐节</button>
+        <button type="button" data-v="photo">自己的照</button>
+      </div>
+    </div>
+
+    <div class="field" id="boxGeneric">
+      <div class="texs-row" id="genericRow"></div>
+      <p class="warn">不用准备素材，选个颜色就能出。</p>
+    </div>
+
+    <div class="field" id="boxFestival" hidden>
+      <div class="seg seg-sm" id="citySeg"></div>
+      <div class="flist" id="flist" role="listbox" aria-label="音乐节列表"></div>
+      <p class="warn" id="festWarn"></p>
+
+      <div class="lu">
+        <span class="lb">节目单 <span class="opt">按真实时刻排版</span></span>
+        <div class="seg seg-sm" id="luSeg"></div>
+        <p class="warn" id="luWarn"></p>
+        <details class="more">
+          <summary>粘一份自己的节目单</summary>
+          <div class="field field-in">
+            <textarea id="luText" rows="6" maxlength="2000" spellcheck="false" placeholder="6.01 SUN&#10;20:40-21:30 痛仰&#10;20:00-20:40 陈绮贞&#10;&#10;6.02 MON&#10;20:40-21:30 万能青年旅店"></textarea>
+            <div class="lu-a">
+              <button type="button" class="btn-sm" id="luApply">用它排版</button>
+              <button type="button" class="btn-sm ghost" id="luClear">清空</button>
+            </div>
+            <p class="warn">每行一个乐队，时间写开头就行。没有时间的行会当成日期分段。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="field" id="boxPhoto" hidden>
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="选择照片">
+        <input type="file" id="file" accept="image/*" hidden>
+        <span class="drop-t">点这里选照片，或拖进来</span>
+        <span class="drop-s">号码会压在下半部分，选主体偏上的图</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lb" for="p1">能联系到你的号码 <em>必填</em></label>
+      <input id="p1" class="num" inputmode="numeric" autocomplete="off" maxlength="13" placeholder="138 8888 8888">
+      <p class="warn">别填这台手机的号 —— 填家人、备用机或同事的。</p>
+    </div>
+
+    <details class="more">
+      <summary>再加一个备用号码</summary>
+      <div class="field field-in">
+        <input id="p2" class="num" inputmode="numeric" autocomplete="off" maxlength="13" placeholder="第二个号（选填）">
+      </div>
+    </details>
+
+    <div class="field">
+      <label class="lb" for="note">一句话备注 <span class="opt">选填</span></label>
+      <input id="note" maxlength="24" autocomplete="off" placeholder="如：内有工作资料，麻烦联系">
+    </div>
+
+    <div class="field">
+      <span class="lb">屏幕比例</span>
+      <div class="seg" id="segRatio"></div>
+    </div>
+
+    <div class="field">
+      <span class="lb">信息位置</span>
+      <div class="seg" id="segPos">
+        <button type="button" data-v="top" class="on">上</button>
+        <button type="button" data-v="mid">中</button>
+        <button type="button" data-v="bottom">下</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="lb">底色</span>
+      <div class="seg" id="segStyle">
+        <button type="button" data-v="dark" class="on">黑底白字</button>
+        <button type="button" data-v="light">白底黑字</button>
+        <button type="button" data-v="glass">半透明</button>
+      </div>
+    </div>
+
+    <button type="button" class="cta" id="go">生成壁纸</button>
+    <p class="fine">照片和号码只在你这一台设备的浏览器里处理，不上传任何服务器。</p>
+
+  </section>
+</main>
+
+<footer class="ftr">
+  <span><a href="https://github.com/" id="repo">开源在 GitHub</a> · MIT</span>
+  <span>号码必须是另一台手机的号</span>
+</footer>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-in" role="dialog" aria-modal="true" aria-label="生成结果">
+    <p class="sheet-t" id="sheetT">长按图片 → 存储到照片</p>
+    <img id="out" alt="生成的壁纸">
+    <div class="sheet-a">
+      <a id="dl" class="btn" download="gigwall-wallpaper.png">下载</a>
+      <button id="close" class="btn ghost" type="button">关掉</button>
+    </div>
+    <p class="sheet-s">存好后去 设置 → 墙纸 → 设为锁屏</p>
+  </div>
+</div>
+
+<script src="./src/presets.js"></script>
+<script src="./src/festivals.js"></script>
+<script src="./src/lineups.js"></script>
+<script src="./src/render.js"></script>
+<script src="./src/app.js"></script>
+</body>
+</html>

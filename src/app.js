@@ -1,5 +1,5 @@
 (function () {
-  var G = window.GIGWALL;
+  var G = window.LOSTWALL;
 
   function $(id) { return document.getElementById(id); }
 
@@ -89,7 +89,7 @@
 
   function save() {
     try {
-      localStorage.setItem('gigwall', JSON.stringify({
+      localStorage.setItem('lostwall', JSON.stringify({
         mode: state.mode,
         generic: state.generic,
         city: state.city,
@@ -121,7 +121,7 @@
 
   function restore() {
     try {
-      var s = JSON.parse(localStorage.getItem('gigwall') || '{}');
+      var s = JSON.parse(localStorage.getItem('lostwall') || '{}');
       if (s.mode) state.mode = s.mode;
       if (s.generic) state.generic = s.generic;
       if (s.city) state.city = s.city;

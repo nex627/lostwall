@@ -1,6 +1,6 @@
 (function () {
-  window.GIGWALL = window.GIGWALL || {};
-  var G = window.GIGWALL;
+  window.LOSTWALL = window.LOSTWALL || {};
+  var G = window.LOSTWALL;
 
   G.FESTIVALS = [
     { id: 'midi', name: '迷笛', en: 'MIDI', cities: ['北京', '苏州', '深圳'], months: [5, 10] },

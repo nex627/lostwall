@@ -1,5 +1,5 @@
 (function () {
-  var G = window.GIGWALL;
+  var G = window.LOSTWALL;
 
   var MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace';
   var SANS = '-apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif';

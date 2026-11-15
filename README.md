@@ -1,4 +1,4 @@
-# gigwall
+# lostwall
 
 把音乐节的现场设成手机锁屏，上面用大字印一行「捡到请联系 138 8888 8888」。
 手机丢了，捡到的人按一下电源键就知道打给谁——不用解锁，不用装东西。
@@ -27,22 +27,25 @@
 
 **填家人、备用机或同事的。**
 
+## 在线版
+
+**https://nex627.github.io/lostwall/**
+
 ## 部署到 GitHub Pages
 
 不用构建，推上去就能用。
 
 ```bash
-git init
-git add .
-git commit -m "init"
-git remote add origin https://github.com/<你的用户名>/gigwall.git
-git push -u origin main
+git clone https://github.com/nex627/lostwall.git
+cd lostwall
+# 改完
+git add . && git commit -m "update" && git push
 ```
 
-然后仓库 **Settings → Pages → Source: Deploy from a branch → main / (root)**。
-等一分钟，访问 `https://<你的用户名>.github.io/gigwall/`。
+仓库 **Settings → Pages → Source: Deploy from a branch → main / (root)**。
+推上去等一分钟，访问 `https://nex627.github.io/lostwall/`。
 
-> 项目页地址带子路径 `/gigwall/`，所以 HTML 里的资源全部用相对路径（`./src/app.js`）。
+> 项目页地址带子路径 `/lostwall/`，所以 HTML 里的资源全部用相对路径（`./src/app.js`）。
 > 改成绝对路径 `/src/app.js` 会在 Pages 上全部 404。
 
 ## 本地跑

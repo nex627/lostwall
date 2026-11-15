@@ -1,6 +1,6 @@
 (function () {
-  window.GIGWALL = window.GIGWALL || {};
-  var G = window.GIGWALL;
+  window.LOSTWALL = window.LOSTWALL || {};
+  var G = window.LOSTWALL;
 
   /*
    * 节目单数据。

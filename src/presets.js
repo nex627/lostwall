@@ -1,6 +1,6 @@
 (function () {
-  window.GIGWALL = window.GIGWALL || {};
-  var G = window.GIGWALL;
+  window.LOSTWALL = window.LOSTWALL || {};
+  var G = window.LOSTWALL;
 
   G.RATIOS = [
     { k: '19.5', label: '19.5:9', w: 1179, h: 2556 },

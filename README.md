@@ -48,6 +48,25 @@ git add . && git commit -m "update" && git push
 > 项目页地址带子路径 `/lostwall/`，所以 HTML 里的资源全部用相对路径（`./src/app.js`）。
 > 改成绝对路径 `/src/app.js` 会在 Pages 上全部 404。
 
+## 部署到 ciyuannav.com 分站
+
+主站 `ciyuannav.com` 上的 `/lostwall/` 是这个工具的镜像分站，跑在同一个 CloudBase 环境。
+
+```bash
+bash scripts/deploy-ciyuannav.sh            # 只打包到 .deploy/lostwall/
+cloudbase login                             # 首次需要
+bash scripts/deploy-ciyuannav.sh --deploy   # 打包并上传
+```
+
+上传目标是 `-e tokennav-d5g9f29bh451cb17b` 环境的 `/lostwall` 目录，
+完成后访问 `https://ciyuannav.com/lostwall/`。
+
+改环境或路径用环境变量，不用改脚本：
+
+```bash
+ENV_ID=xxx CLOUD_PATH=/foo bash scripts/deploy-ciyuannav.sh --deploy
+```
+
 ## 本地跑
 
 直接双击 `index.html` 就行。没有模块、没有依赖、没有编译。

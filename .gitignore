@@ -3,3 +3,4 @@ Thumbs.db
 _shot*.png
 _v.png
 node_modules/
+.deploy/
